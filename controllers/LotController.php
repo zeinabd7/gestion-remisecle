@@ -1,7 +1,6 @@
 <?php
 
 require_once '../models/Lot.php';
-//require_once 'db.conn.php';
 class LotController{
     private  static $db;
     private static $LotModel;

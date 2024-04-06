@@ -8,19 +8,7 @@ class RemiseCle{
     private $date_remise;
     private $commentaire;
     private $media;
-    /*public function __construct($id=null, $id_lot="",$donneur="",$receveur="", \DateTime $date = null,$commentaire="", $media="") {
-        $this->id=$id;
-        $this->id_lot=$id_lot;
-        $this->donneur=$donneur;
-        $this->receveur=$receveur;
-        if ($date!=null)  
-            $this->setDate($date);  
-        else  
-            $this->date=new \DateTime(); 
-        $this->commentaire=$commentaire;
-        $this->media=$media;
-        
-    }*/
+    
     private $conn;
     private $table_name = "remise";
 

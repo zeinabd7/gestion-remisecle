@@ -5,7 +5,7 @@ private $id_immeuble;
 private $nom;
 private $id_coproprio;
 private $conn;
-    private $table_name = "immeuble";
+private $table_name = "lot";
 
     public function __construct($db) {
         $this->conn = $db;
@@ -20,7 +20,7 @@ private $conn;
     }
     // Méthode pour créer un nouveau lot
     public function create($data) {
-        $query = "INSERT INTO " . $this->table_name . " SET id_immeuble=:id_immeuble, nom=:nom,id_coproprio=:id_coproprio";
+        $query = "INSERT INTO " . $this->table_name . " SET id_immeuble=:id_immeuble, nom=:nom, id_coproprio=:id_coproprio";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(":id_immeuble", $data['id_immeuble']);
