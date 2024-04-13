@@ -11,7 +11,6 @@ class CoproprietaireController{
         self::$ProprioModel = new Coproprietaire(self::$db);
     }
     
-    
         public static function getAllProprio() {
             return self::$ProprioModel->getAll();
         }
@@ -22,6 +21,17 @@ class CoproprietaireController{
             }
     
             return self::$ProprioModel->create($data);
+        }
+
+        public static function updateProprio($data) {
+            $tab=['success'=>self::$ProprioModel->update($data['id'],$data)];
+            return $tab;
+        } 
+
+        public static function deleteProprio($data) {
+            // Appeler la méthode delete du modèle pour supprimer un propriétaire en fonction de son id
+            $tab=['success'=>self::$ProprioModel->delete($data['id'])];
+            return $tab;
         }
     }
 

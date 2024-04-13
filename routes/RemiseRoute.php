@@ -35,18 +35,14 @@ switch ("$method $path") {
         echo json_encode(RemiseController::getAllRemisesCles());
         break;
     case 'POST /remises':
-         echo json_encode(RemiseController::createRemiseCle($data));
+        //echo $_FILES['id_lot'];
+        echo json_encode(RemiseController::createRemiseCle($data));
         break;
-    case 'PUT /remises/{id}':
-        $id = $_GET['id'] ?? null;
-        echo json_encode(RemiseController::updateRemiseCle($id,$data));
+    case 'PUT /remises':
+        echo json_encode(RemiseController::updateRemiseCle($data));
         break;
-    case "DELETE /remises/".$id:
-            // Récupérer l'identifiant de l'URL
-            echo "Sirrrr";
-            
-            // Appeler la fonction de suppression du contrôleur
-            echo json_encode(RemiseController::deleteRemiseCle($id));
+    case "DELETE /remises":            
+            echo json_encode(RemiseController::deleteRemiseCle($data));
             break;
     case 'GET /immeubles':
         echo json_encode(ImmeubleController::getAllImmeuble());
@@ -54,11 +50,23 @@ switch ("$method $path") {
     case 'POST /immeubles':
         echo json_encode(ImmeubleController::createImmeuble($data));
         break;
+    case 'PUT /immeubles':
+        echo json_encode(ImmeubleController::updateImmeuble($data));
+        break;
+    case "DELETE /immeubles":            
+        echo json_encode(ImmeubleController::deleteImmeuble($data));
+        break;
     case 'GET /coproprietaires':
         echo json_encode(CoproprietaireController::getAllProprio());
         break;
     case 'POST /coproprietaires':
         echo json_encode(CoproprietaireController::createProprio($data));
+        break;
+    case 'PUT /coproprietaires':
+        echo json_encode(CoproprietaireController::updateProprio($data));
+        break;
+    case "DELETE /coproprietaires":            
+        echo json_encode(CoproprietaireController::deleteProprio($data));
         break;
     case 'GET /lots':
         echo json_encode(LotController::getAllLots());
@@ -66,10 +74,16 @@ switch ("$method $path") {
     case 'POST /lots':
         echo json_encode(LotController::createLot($data));
         break;
+    case 'PUT /lots':
+        echo json_encode(LotController::updateLot($data));
+        break;
+    case "DELETE /lots":            
+        echo json_encode(LotController::deleteLot($data));
+        break;
     default:
-        // If route not found
         http_response_code(404);
         echo json_encode(["message" => "Route not found"]);
         break;
     }
+
 ?>

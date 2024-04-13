@@ -26,8 +26,39 @@ private $table_name = "coproprietaire";
         $stmt->bindParam(":adresse", $data['adresse']);
 
         $stmt->execute();
+
+        $stmt->closeCursor();
     
     }
+    public  function update($id,$data) {
+        $queryy = "UPDATE " . $this->table_name . " SET nom=:nom, adresse=:adresse WHERE id=:id";
+        $prep = $this->conn->prepare($queryy);
+        $prep->bindParam(":nom", $data['nom']);
+        $prep->bindParam(":adresse", $data['adresse']);
+        $prep->bindParam(":id", $id);
+
+        return $prep->execute();
+    }
+
+    public  function delete($id) {
+        $queryy= "SELECT * FROM ".$this->table_name." WHERE id=?";
+        $prep= $this->conn->prepare($queryy);
+        $prep->bindParam(1,$id); 
+        if ($prep->execute()){
+            $nb= $prep->rowCount();
+            if($nb==0)
+                return false;
+        }
+        $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+
+        return $stmt->execute();
+
+
+    }
+
+
 
 }
 ?>

@@ -79,16 +79,25 @@ class RemiseCle{
         $stmt->bindParam(":media", $data['media']);
         $stmt->bindParam(":id", $id);
 
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     // Méthode pour supprimer une remise de clé
     public  function delete($id) {
+        $queryy= "SELECT * FROM ".$this->table_name." WHERE id=?";
+        $prep= $this->conn->prepare($queryy);
+        $prep->bindParam(1,$id); 
+        if ($prep->execute()){
+            $nb= $prep->rowCount();
+            if($nb==0)
+                return false;
+        }
         $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $id);
 
-        $stmt->execute();
+        return $stmt->execute();
+
 
     }
 

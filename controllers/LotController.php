@@ -22,6 +22,17 @@ class LotController{
     
             return self::$LotModel->create($data);
         }
+
+        public static function updateLot($data) {
+            $tab=['success'=>self::$LotModel->update($data['id'],$data)];
+            return $tab;
+        } 
+
+        public static function deleteLot($data) {
+            // Appeler la méthode delete du modèle pour supprimer un lot
+            $tab=['success'=>self::$LotModel->delete($data['id'])];
+            return $tab;
+        }
     }
 
 ?>

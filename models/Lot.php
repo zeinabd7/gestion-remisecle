@@ -31,6 +31,36 @@ private $table_name = "lot";
         $stmt->execute();
     
     }
+    //Methode poit modifier  un lot existant
+    public  function update($id,$data) {
+        $queryy = "UPDATE " . $this->table_name . " SET id_immeuble=:id_immeuble, nom=:nom, id_coproprio=:id_coproprio WHERE id=:id";
+        $prep = $this->conn->prepare($queryy);
+        $prep->bindParam(":id_immeuble", $data['id_immeuble']);
+        $prep->bindParam(":nom", $data['nom']);
+        $prep->bindParam(":id_coproprio", $data['id_coproprio']);
+        $prep->bindParam(":id", $id);
+
+        return $prep->execute();
+    }
+
+    //Méthode pour supprimer un  lot
+    public  function delete($id) {
+        $queryy= "SELECT * FROM ".$this->table_name." WHERE id=?";
+        $prep= $this->conn->prepare($queryy);
+        $prep->bindParam(1,$id); 
+        if ($prep->execute()){
+            $nb= $prep->rowCount();
+            if($nb==0)
+                return false;
+        }
+        $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id);
+
+        return $stmt->execute();
+
+
+    }
 
 }
 ?>
